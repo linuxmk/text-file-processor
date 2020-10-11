@@ -1,6 +1,6 @@
 #include <iostream>
-#include "include/parseargs.h"
-#include "include/parsetext.h"
+#include "parseargs.h"
+#include "parsetext.h"
 
 int main(int argc, char **argv)
 {
