@@ -1,4 +1,4 @@
-#include "parseargs.h"
+#include "include/parseargs.h"
 
 void PrintHelp()
 {
@@ -76,28 +76,22 @@ bool ParseArgs::parseArgs()
                           mModes.set(mSentances);
                           mModes.set(mPunctuation);
 
-//                          std::cerr << "all is set\n";
                           break;
 
                         case WORDS:
                             mModes.set(mWords);
-//                            std::cerr << "WORDS is set\n";
                           break;
 
                         case PARAGRAPHS:
                             mModes.set(mParagraphs );
-//                            std::cerr << "PARAGRAPHS is set\n";
                           break;
 
                         case SENTANCES:
                             mModes.set(mSentances);
-//                            std::cerr << "SENTANCES is set\n";
                           break;
 
                         case PUNCTUATIONS:
                             mModes.set(mPunctuation);
-//                            std::cerr << "PUNCTUATIONS is set\n";
-
                           break;
                         default:
                           /* Unknown suboption. */
