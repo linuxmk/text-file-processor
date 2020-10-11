@@ -1,4 +1,4 @@
-#include "parseargs.h"
+#include "include/parseargs.h"
 
 void PrintHelp()
 {
@@ -11,9 +11,7 @@ void PrintHelp()
 }
 
 ParseArgs::ParseArgs(int argc, char** argv) : mArgc{argc}, mArgv{argv}
-{
-    mSucc = parseArgs();
-}
+{}
 
 bool ParseArgs::parseArgs()
 {

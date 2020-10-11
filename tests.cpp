@@ -3,12 +3,19 @@
 #include <gtest/gtest.h>
  
 
-TEST(SquareRootTest, PositiveNos) { 
-/*    ASSERT_EQ(6, squareRoot(36.0));
+TEST(Parsing, PositiveNos) { 
+    
+	char *argv[] = { "--in ", "input.txt", "--mode ", "all ", "--out", " output.txt" };
+			
+
+	ParseArgs args(, argv);
+
+	
+    ASSERT_EQ(6, squareRoot(36.0));
     ASSERT_EQ(18.0, squareRoot(324.0));
     ASSERT_EQ(25.4, squareRoot(645.16));
     ASSERT_EQ(0, squareRoot(0.0));
-    */
+    
 }
  
 TEST(SquareRootTest, NegativeNos) {

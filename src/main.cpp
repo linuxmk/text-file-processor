@@ -1,15 +1,13 @@
 #include <iostream>
-#include "parseargs.h"
-#include "parsetext.h"
+#include "include/parseargs.h"
+#include "include/parsetext.h"
 
 int main(int argc, char **argv)
 {
 
-    std::map<std::string, int> words;
-
     ParseArgs args(argc, argv);
 
-    if(args())
+    if(args.parseArgs())
     {
         std::cerr << argv[0] << " --in <filename> --mode <all|words|paragraphs|sentance|punctions> [--out <filename>]\n";
         return -1;
