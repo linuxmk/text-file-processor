@@ -46,8 +46,6 @@ void TextParser::parseText(std::bitset<4> modes)
                     ++mWords[word];
                     cnt = 0;
                     word[cnt] = '\0';
-
-//                    memset(word,0,128);
                 }
 
             }
@@ -63,7 +61,7 @@ void TextParser::parseText(std::bitset<4> modes)
             ++mSentances;
         }
 
-        if( modes.test(ParseArgs::mPara) && prev == '.' && ch == '\n')
+        if( modes.test(ParseArgs::mParagraphs) && prev == '.' && ch == '\n')
         {
             ++mParagraphs;
         }
@@ -105,7 +103,7 @@ ostream& operator<< (ostream &out, TextParser & data)
         }
     }
 
-    if(data.mModes.test(ParseArgs::mPara))
+    if(data.mModes.test(ParseArgs::mParagraphs))
         out << "\nParagraph count: " << data.mParagraphs << "\n";
 
     if(data.mModes.test(ParseArgs::mSentances))

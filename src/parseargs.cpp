@@ -74,31 +74,31 @@ bool ParseArgs::parseArgs()
                     {
                         case ALL:
                           mModes.set(mWords);
-                          mModes.set(mPara) ;
+                          mModes.set(mParagraphs) ;
                           mModes.set(mSentances);
                           mModes.set(mPunctuation);
 
-     //                     std::cerr << "all is set\n";
+                          std::cerr << "all is set\n";
                           break;
 
                         case WORDS:
                             mModes.set(mWords);
-//                            std::cerr << "WORDS is set\n";
+                            std::cerr << "WORDS is set\n";
                           break;
 
                         case PARAGRAPHS:
-                            mModes.set(mPara) ;
-//                            std::cerr << "PARAGRAPHS is set\n";
+                            mModes.set(mParagraphs );
+                            std::cerr << "PARAGRAPHS is set\n";
                           break;
 
                         case SENTANCES:
                             mModes.set(mSentances);
-//                            std::cerr << "SENTANCES is set\n";
+                            std::cerr << "SENTANCES is set\n";
                           break;
 
                         case PUNCTUATIONS:
                             mModes.set(mPunctuation);
-//                            std::cerr << "PUNCTUATIONS is set\n";
+                            std::cerr << "PUNCTUATIONS is set\n";
 
                           break;
                         default:
@@ -112,7 +112,7 @@ bool ParseArgs::parseArgs()
 
             case 'o':
                 mOutputFilename = optarg;
-//                std::cout << "Write file set to: " << mOutputFilename << std::endl;
+                std::cout << "Write file set to: " << mOutputFilename << std::endl;
                 break;
 
             case 'h': // -h or –help

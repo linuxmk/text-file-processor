@@ -14,7 +14,7 @@ public:
     enum
     {
         mWords = 0,
-        mPara = 1,
+        mParagraphs = 1,
         mSentances = 2,
         mPunctuation = 3
     };
