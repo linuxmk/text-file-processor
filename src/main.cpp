@@ -5,6 +5,10 @@
 int main(int argc, char **argv)
 {
 
+    char *argva[] = { "--in ", "input.txt", "--mode ", "all ", "--out", " output.txt" };
+
+    std::cerr << sizeof(argva);// / sizeof(char *);
+
     ParseArgs args(argc, argv);
 
     if(args.parseArgs())
@@ -13,11 +17,15 @@ int main(int argc, char **argv)
         return -1;
     }
 
-    TextParser data(args);
+    try {
+        TextParser data(args);
+        data.parseText(args.getModes());
 
-    data.parseText(args.getModes());
+        std::cout << data << std::endl;
 
+    }  catch (std::exception &e) {
+        std::cerr << e.what() << std::endl;
+    }
 
-    std::cout << data << std::endl;
     return 0;
 }

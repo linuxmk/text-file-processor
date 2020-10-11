@@ -3,19 +3,31 @@
 #include <gtest/gtest.h>
  
 
+enum
+{
+	mWords = 0,
+        mParagraphs = 1,
+        mSentances = 2,
+        mPunctuation = 3
+};
+
 TEST(Parsing, PositiveNos) { 
     
-	char *argv[] = { "--in ", "input.txt", "--mode ", "all ", "--out", " output.txt" };
+	char *argv[] = { "--in", "input.txt", "--mode", "all", "--out", "output.txt" };
 			
 
-	ParseArgs args(, argv);
+	ParseArgs args(6 , argv);
 
 	
-    ASSERT_EQ(6, squareRoot(36.0));
-    ASSERT_EQ(18.0, squareRoot(324.0));
-    ASSERT_EQ(25.4, squareRoot(645.16));
-    ASSERT_EQ(0, squareRoot(0.0));
-    
+    ASSERT_EQ(true, args.parseArgs());
+    ASSERT_EQ(false, args());
+    ASSERT_EQ( true, args.getModes().test(mWords));
+    ASSERT_EQ( true, args.getModes().test(mParagraphs));
+    ASSERT_EQ( true, args.getModes().test(mSentances));
+    ASSERT_EQ( true, args.getModes().test(mPunctuation));
+
+
+
 }
  
 TEST(SquareRootTest, NegativeNos) {

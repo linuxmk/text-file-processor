@@ -1,4 +1,4 @@
-#include "include/parsetext.h"
+#include "parsetext.h"
 
 
 TextParser::TextParser(const ParseArgs & args) : mInFile{args.inFilename()}, mOutFile{args.outFilename()}, mModes{args.getModes()}, mParagraphs{0}, mSentances{0}
