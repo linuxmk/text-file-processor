@@ -20,7 +20,9 @@ public:
     };
 
     ParseArgs(int argc, char** argv);
-    bool            operator()() const { return mSucc;}
+    bool            operator()() const {
+//        std::cerr << mSucc << std::endl;
+        return mSucc;}
     std::string     inFilename() const { return mInputFilename;}
     std::string     outFilename() const { return mOutputFilename;}
     bool            parseArgs( );

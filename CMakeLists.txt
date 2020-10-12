@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 2.8.9)
+set(CMAKE_BUILD_TYPE Debug)
 project(text-file-processor)
 
 #Bring the headers, such as Student.h into the project

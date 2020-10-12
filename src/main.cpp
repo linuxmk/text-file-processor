@@ -1,17 +1,16 @@
 #include <iostream>
 #include "parseargs.h"
 #include "parsetext.h"
+//#include "include/parseargs.h"
+//#include "include/parsetext.h"
 
 int main(int argc, char **argv)
 {
 
-    char *argva[] = { "--in ", "input.txt", "--mode ", "all ", "--out", " output.txt" };
-
-    std::cerr << sizeof(argva);// / sizeof(char *);
-
     ParseArgs args(argc, argv);
+    args.parseArgs();
 
-    if(args.parseArgs())
+    if(!args())
     {
         std::cerr << argv[0] << " --in <filename> --mode <all|words|paragraphs|sentance|punctions> [--out <filename>]\n";
         return -1;
@@ -20,8 +19,6 @@ int main(int argc, char **argv)
     try {
         TextParser data(args);
         data.parseText(args.getModes());
-
-        std::cout << data << std::endl;
 
     }  catch (std::exception &e) {
         std::cerr << e.what() << std::endl;

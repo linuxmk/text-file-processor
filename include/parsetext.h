@@ -34,6 +34,12 @@ public:
     TextParser(const ParseArgs &args);
     void parseText(std::bitset<4> modes);
     auto invert_map(map<string, int> & mymap);
+    auto getNumWords() { return mWords.size(); }
+    auto getNumParagraphs() { return mParagraphs; }
+    auto getNumSentances() { return mSentances; }
+    auto getNumPunctuation() { return mPunctuation.size(); }
+    ~TextParser();
+
 
     friend ostream& operator<< (ostream &out, TextParser & data);
 

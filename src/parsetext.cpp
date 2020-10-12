@@ -1,7 +1,8 @@
 #include "parsetext.h"
+//#include "include/parsetext.h"
 
 
-TextParser::TextParser(const ParseArgs & args) : mInFile{args.inFilename()}, mOutFile{args.outFilename()}, mModes{args.getModes()}, mParagraphs{0}, mSentances{0}
+TextParser::TextParser(const ParseArgs & args) : mInFile{args.inFilename()}, mOutFile{args.outFilename()},mIn{nullptr}, mOut{nullptr}, mModes{args.getModes()}, mParagraphs{0}, mSentances{0}
 {
     mIn.open(mInFile);
 
@@ -18,6 +19,12 @@ TextParser::TextParser(const ParseArgs & args) : mInFile{args.inFilename()}, mOu
             throw std::invalid_argument("File can not be opened for writing");
         }
     }
+}
+
+TextParser::~TextParser()
+{
+    mIn.close();
+    mOut.close();
 }
 
 void TextParser::parseText(std::bitset<4> modes)
@@ -67,6 +74,15 @@ void TextParser::parseText(std::bitset<4> modes)
         }
         prev = ch;
     }
+
+    if (mOut)
+    {
+        mOut << *this << std::endl;
+    }
+    else
+    {
+        std::cerr << *this << std::endl;
+    }
 }
 
 auto TextParser::invert_map(map<string, int> &mymap)
@@ -86,13 +102,6 @@ ostream& operator<< (ostream &out, TextParser & data)
 {
 
     auto convWord = data.invert_map(data.mWords);
-
-    if(!data.mOutFile.empty())
-    {
-       streambuf* stream_buffer_file = data.mOut.rdbuf();
-            // Redirect cout to file
-       cout.rdbuf(stream_buffer_file);
-    }
 
     if(data.mModes.test(ParseArgs::mWords))
     {

@@ -1,4 +1,5 @@
 #include "parseargs.h"
+//#include "include/parseargs.h"
 
 void PrintHelp()
 {
@@ -10,8 +11,13 @@ void PrintHelp()
     exit(1);
 }
 
-ParseArgs::ParseArgs(int argc, char** argv) : mArgc{argc}, mArgv{argv}
-{}
+ParseArgs::ParseArgs(int argc, char** argv) :mArgc{argc}, mArgv{argv},  mSucc{true}
+{
+//    std::cerr << mArgc << std::endl;
+
+//    for(int i = 0 ; i < mArgc; ++i)
+//        std::cerr << mArgv[i] << std::endl;
+}
 
 bool ParseArgs::parseArgs()
 {
@@ -95,7 +101,6 @@ bool ParseArgs::parseArgs()
                           break;
                         default:
                           /* Unknown suboption. */
-                            std::cerr << "Unknown suboption " << value << "\n";
                             mSucc = false;
                           break;
                     }
@@ -104,7 +109,7 @@ bool ParseArgs::parseArgs()
 
             case 'o':
                 mOutputFilename = optarg;
-                std::cout << "Write file set to: " << mOutputFilename << std::endl;
+//                std::cout << "Write file set to: " << mOutputFilename << std::endl;
                 break;
 
             case 'h': // -h or –help
@@ -115,5 +120,8 @@ bool ParseArgs::parseArgs()
                 break;
         }
     }
-    return args < 2;
+    optind = 1;
+    mSucc = ( args == 2 ) && mSucc ;
+
+    return ( mSucc );
 }
