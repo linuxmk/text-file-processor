@@ -11,9 +11,12 @@ enum
         mPunctuation = 3
 };
 
+char inputFile[32] = "/inputz.txt";
+char outputFile[32] = "output.txt";
+
 TEST(ParsingArgs, parseArgs) { 
     
-	char *argv[] = { "runTEst", "--in", "input.txt", "--mode", "all", "--out", "output.txt" };
+	char *argv[] = { "runTEst", "--in", "input.txt", "--mode", "all", "--out", outputFile };
 
         ParseArgs args(sizeof(argv)/sizeof(char *) , argv);
 	args.parseArgs();
@@ -27,13 +30,13 @@ TEST(ParsingArgs, parseArgs) {
  
 TEST(ParsingText, parseAll) {
 
-        char 	cwd[1024] = "/home/rb/devel/projects/c++/companiesTests/testLab/text-file-processor";
+        char 	cwd[1024];
 
-        //getcwd(cwd, sizeof(cwd));
+        getcwd(cwd, sizeof(cwd));
 
-	strcat(cwd, "/input.txt");
+	strcat(cwd, inputFile);
 
-        char *argv[] = { "runTests", "--in", cwd , "--mode", "all", "--out", "output.txt"};
+        char *argv[] = { "runTests", "--in", cwd , "--mode", "all", "--out", outputFile };
 
         ParseArgs args(sizeof(argv)/sizeof(char *) , argv);
         args.parseArgs();
@@ -49,13 +52,13 @@ TEST(ParsingText, parseAll) {
 
 TEST(ParsingText, parseSetOneByOne) {
 
-        char    cwd[1024] = "/home/rb/devel/projects/c++/companiesTests/testLab/text-file-processor";
+        char    cwd[1024];
 
-      //  getcwd(cwd, sizeof(cwd));
+        getcwd(cwd, sizeof(cwd));
 
-        strcat(cwd, "/input.txt");
+        strcat(cwd, inputFile);
 
-        char *argv[] = { "runTests", "--in", cwd , "--mode", "words", "--mode", "paragraphs","--mode", "sentances","--mode", "punctuations", "--out", "output.txt"};
+        char *argv[] = { "runTests", "--in", cwd , "--mode", "words", "--mode", "paragraphs","--mode", "sentances","--mode", "punctuations", "--out", outputFile };
 
         ParseArgs args(sizeof(argv)/sizeof(char *) , argv);
         args.parseArgs();
@@ -73,13 +76,12 @@ TEST(ParsingText, parseSetOneByOne) {
 TEST(ParsingText, CheckOutFile) {
 
         char    cwd[1024];
-	char	outFile[32] = "output.txt";
-
+	
         getcwd(cwd, sizeof(cwd));
 
-        strcat(cwd, "/input.txt");
+        strcat(cwd, inputFile);
 
-        char *argv[] = { "runTests", "--in", cwd , "--mode", "all", "--out", "output.txt" };
+        char *argv[] = { "runTests", "--in", cwd , "--mode", "all", "--out", outputFile };
 
         ParseArgs args(sizeof(argv)/sizeof(char *) , argv);
         args.parseArgs();
@@ -87,7 +89,7 @@ TEST(ParsingText, CheckOutFile) {
         TextParser data(args);
         data.parseText(args.getModes());
 
-	std::ifstream out(outFile);
+	std::ifstream out(outputFile);
 
         ASSERT_EQ(true, out.is_open());
 
@@ -101,9 +103,9 @@ TEST(ParsingText, parseWords) {
 
         getcwd(cwd, sizeof(cwd));
 
-        strcat(cwd, "/input.txt");
+        strcat(cwd, inputFile);
 
-        char *argv[] = { "runTests", "--in", cwd , "--mode", "words", "--out", "output.txt" };
+        char *argv[] = { "runTests", "--in", cwd , "--mode", "words", "--out", outputFile };
 
         ParseArgs args(sizeof(argv)/sizeof(char *) , argv);
         args.parseArgs();
@@ -123,9 +125,9 @@ TEST(ParsingText, parseParagraphs) {
 
         getcwd(cwd, sizeof(cwd));
 
-        strcat(cwd, "/input.txt");
+        strcat(cwd, inputFile);
 
-        char *argv[] = { "runTests", "--in", cwd , "--mode", "paragraphs", "--out", "output.txt" };
+        char *argv[] = { "runTests", "--in", cwd , "--mode", "paragraphs", "--out", outputFile };
 
         ParseArgs args(sizeof(argv)/sizeof(char *) , argv);
         args.parseArgs();
@@ -143,11 +145,10 @@ TEST(ParsingText, parseSentances) {
 
         char    cwd[1024];
 
-       getcwd(cwd, sizeof(cwd));
+        getcwd(cwd, sizeof(cwd));
+        strcat(cwd, inputFile);
 
-        strcat(cwd, "/input.txt");
-
-        char *argv[] = { "runTests", "--in", cwd , "--mode", "sentances", "--out", "output.txt" };
+        char *argv[] = { "runTests", "--in", cwd , "--mode", "sentances", "--out", outputFile };
 
         ParseArgs args(sizeof(argv)/sizeof(char *) , argv);
         args.parseArgs();
@@ -166,10 +167,9 @@ TEST(ParsingText, parsePunctuations) {
         char    cwd[1024];
 
         getcwd(cwd, sizeof(cwd));
+        strcat(cwd, inputFile);
 
-        strcat(cwd, "/input.txt");
-
-        char *argv[] = { "runTests", "--in", cwd , "--mode", "punctuations", "--out", "output.txt" };
+        char *argv[] = { "runTests", "--in", cwd , "--mode", "punctuations", "--out", outputFile };
 
         ParseArgs args(sizeof(argv)/sizeof(char *) , argv);
         args.parseArgs();
@@ -188,10 +188,9 @@ TEST(ParsingText, parsaeWordsAndPunctuations) {
         char    cwd[1024];
 
         getcwd(cwd, sizeof(cwd));
+        strcat(cwd, inputFile);
 
-        strcat(cwd, "/input.txt");
-
-        char *argv[] = { "runTests", "--in", cwd , "--mode", "punctuations", "--mode", "words", "--out", "output.txt" };
+        char *argv[] = { "runTests", "--in", cwd , "--mode", "punctuations", "--mode", "words", "--out", outputFile };
 
         ParseArgs args(sizeof(argv)/sizeof(char *) , argv);
         args.parseArgs();
@@ -208,9 +207,7 @@ TEST(ParsingText, parsaeWordsAndPunctuations) {
 
 TEST(ParsingArgs, MissingModes) {
     
-	char	outFile[13] = "output.txt";
-
-        char *argv[] = { "runTests", "--in", outFile };
+        char *argv[] = { "runTests", "--in", outputFile };
 
         ParseArgs args(sizeof(argv)/sizeof(char *) , argv);
 	args.parseArgs();
@@ -232,7 +229,7 @@ TEST(ParsingArgs, MissingInputFile) {
 
 TEST(ParsingArgs, MissingWrongMode) {
 
-        char *argv[] = { "runTests", "--in", "input.txt", "--mode", "alll" };
+        char *argv[] = { "runTests", "--in", inputFile, "--mode", "alll" };
 
         ParseArgs args(sizeof(argv)/sizeof(char *) , argv);
         args.parseArgs();
@@ -242,7 +239,7 @@ TEST(ParsingArgs, MissingWrongMode) {
 
 TEST(ParsingArgs, MissingMisspeldSentance) {
 
-        char *argv[] = { "runTests", "--in", "input.txt", "--mode", "sentancs" };
+        char *argv[] = { "runTests", "--in", inputFile, "--mode", "sentancs" };
 
         ParseArgs args(sizeof(argv)/sizeof(char *) , argv);
         args.parseArgs();
